@@ -1,10 +1,22 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
+import {Linking, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import Animated, {FadeInDown} from 'react-native-reanimated';
 import TypeWriter from 'react-native-typewriter';
 import LogoGradient from '../components/LogoGradient';
+import {Colors} from '../models/Colors';
 
 const Welcome = () => {
+  const nav = useNavigation();
+
+  const next = () => {
+    nav.navigate('SelectServices' as never);
+  };
+
+  const openTos = () => {
+    Linking.openURL('https://safeimnetz.at/nutzungsbedingungen.html');
+  };
+
   return (
     <View style={{flex: 1}}>
       <LogoGradient />
@@ -49,6 +61,7 @@ const Welcome = () => {
         </Animated.View>
         <Animated.View entering={FadeInDown.duration(1000).delay(6500)}>
           <TouchableOpacity
+            onPress={() => next()}
             style={{
               height: 55,
               width: '100%',
@@ -58,11 +71,11 @@ const Welcome = () => {
               alignItems: 'center',
               marginTop: 80,
             }}>
-            <Text style={{fontWeight: 'bold', fontSize: 17, color: '#883D8C'}}>Los geht's</Text>
+            <Text style={{fontWeight: 'bold', fontSize: 17, color: Colors.primary}}>Los geht's</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => openTos()}>
             <Text style={{color: 'white', fontSize: 12, textAlign: 'center', marginTop: 10}}>
-              Damit akzeptierst du die <Text style={{textDecorationLine: 'underline'}}>Nutzungsbestimmungen</Text>
+              Damit akzeptierst du die <Text style={{textDecorationLine: 'underline'}}>Nutzungsbedingungen</Text>
             </Text>
           </TouchableOpacity>
         </Animated.View>

@@ -3,6 +3,7 @@ import {StackNavigationOptions, createStackNavigator} from '@react-navigation/st
 import React from 'react';
 import {Image, View} from 'react-native';
 import LogoGradient from './components/LogoGradient';
+import {Colors} from './models/Colors';
 import FilteredTaskList from './screens/FilteredTaskList';
 import Home from './screens/Home';
 import OpenSourceLicenses from './screens/OpenSourceLicenses';
@@ -26,12 +27,21 @@ const mainHeaderOptions: StackNavigationOptions = {
   },
 };
 
+const defaultHeaderOptions: StackNavigationOptions = {
+  headerBackTitle: '\n',
+  headerTintColor: Colors.primary,
+};
+
 const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Welcome" component={Welcome} options={{headerShown: false}} />
-        <Stack.Screen name="SelectServices" component={SelectServices} />
+        <Stack.Screen
+          name="SelectServices"
+          component={SelectServices}
+          options={{...defaultHeaderOptions, title: 'Dienste auswählen'}}
+        />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="TaskDetail" component={TaskDetail} />
         <Stack.Screen name="Settings" component={Settings} />
