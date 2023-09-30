@@ -1,4 +1,4 @@
-package com.safeimnetz;
+package at.safeimnetz.app;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

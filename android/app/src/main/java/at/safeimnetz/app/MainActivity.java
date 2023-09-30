@@ -1,4 +1,4 @@
-package com.safeimnetz;
+package at.safeimnetz.app;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
