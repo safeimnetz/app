@@ -1,7 +1,15 @@
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Linking, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
-import Animated, {FadeInDown} from 'react-native-reanimated';
+import Animated, {
+  Easing,
+  FadeInDown,
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
 import TypeWriter from 'react-native-typewriter';
 import LogoGradient from '../components/LogoGradient';
 import {Colors} from '../models/Colors';
@@ -16,6 +24,25 @@ const Welcome = () => {
   const openTos = () => {
     Linking.openURL('https://safeimnetz.at/nutzungsbedingungen.html');
   };
+
+  const translateY = useSharedValue(0);
+
+  useEffect(() => {
+    translateY.value = withRepeat(
+      withSequence(
+        withTiming(0, {duration: 2000, easing: Easing.inOut(Easing.sin)}),
+        withTiming(20, {duration: 2000, easing: Easing.inOut(Easing.sin)}),
+      ),
+      -1,
+      true,
+    );
+  }, [translateY]);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{translateY: translateY.value}],
+    };
+  });
 
   return (
     <View style={{flex: 1}}>
@@ -33,7 +60,7 @@ const Welcome = () => {
           entering={FadeInDown.duration(1000)}
           source={require('./../assets/Text_White.png')}
           resizeMode="contain"
-          style={{width: 300, height: 150}}
+          style={[animatedStyle, {width: 300, height: 150}]}
         />
       </View>
 
@@ -47,10 +74,15 @@ const Welcome = () => {
           paddingHorizontal: 30,
         }}>
         <Animated.View entering={FadeInDown.duration(1000).delay(100)}>
-          <TypeWriter typing={1} fixed style={{color: 'white', fontWeight: '600', fontSize: 16}}>
+          <TypeWriter
+            typing={1}
+            fixed
+            minDelay={40}
+            maxDelay={40}
+            style={{color: 'white', fontWeight: '600', fontSize: 16}}>
             Die App für mehr Sicherheit{'\n'}und Privatsphäre im Internet.
           </TypeWriter>
-          <Animated.View entering={FadeInDown.duration(1000).delay(5000)}>
+          <Animated.View entering={FadeInDown.duration(1000).delay(3500)}>
             <Text style={{color: 'white', marginTop: 20}}>
               Mit der Safe im Netz-App kannst du ganz einfach und spielerisch deine Cyber-Sicherheit verbessern.{'\n\n'}
               Wähle dazu im nächsten Schritt alle Dienste aus, die du verwendest. Die App erstellt dir dann eine
@@ -59,7 +91,7 @@ const Welcome = () => {
             </Text>
           </Animated.View>
         </Animated.View>
-        <Animated.View entering={FadeInDown.duration(1000).delay(6500)}>
+        <Animated.View entering={FadeInDown.duration(1000).delay(4000)}>
           <TouchableOpacity
             onPress={() => next()}
             style={{
