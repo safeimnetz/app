@@ -1,0 +1,80 @@
+{
+    "@react-native-async-storage/async-storage@1.19.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-async-storage/async-storage",
+        "licenseUrl": "https://github.com/react-native-async-storage/async-storage",
+        "parents": "@safeimnetz/app"
+    },
+    "@react-navigation/native@6.1.8": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-navigation/react-navigation",
+        "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
+        "parents": "@safeimnetz/app"
+    },
+    "@react-navigation/stack@6.3.18": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-navigation/react-navigation",
+        "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
+        "parents": "@safeimnetz/app"
+    },
+    "react-native-gesture-handler@2.13.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/software-mansion/react-native-gesture-handler",
+        "licenseUrl": "https://github.com/software-mansion/react-native-gesture-handler/raw/master/LICENSE",
+        "parents": "@safeimnetz/app"
+    },
+    "react-native-linear-gradient@2.8.3": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-linear-gradient/react-native-linear-gradient",
+        "licenseUrl": "https://github.com/react-native-linear-gradient/react-native-linear-gradient/raw/master/LICENSE",
+        "parents": "@safeimnetz/app"
+    },
+    "react-native-reanimated@3.5.4": {
+        "licenses": "MIT",
+        "repository": "https://github.com/software-mansion/react-native-reanimated",
+        "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
+        "parents": "@safeimnetz/app"
+    },
+    "react-native-safe-area-context@4.7.2": {
+        "licenses": "MIT",
+        "repository": "https://github.com/th3rdwave/react-native-safe-area-context",
+        "licenseUrl": "https://github.com/th3rdwave/react-native-safe-area-context/raw/master/LICENSE",
+        "parents": "@safeimnetz/app"
+    },
+    "react-native-screens@3.25.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/software-mansion/react-native-screens",
+        "licenseUrl": "https://github.com/software-mansion/react-native-screens/raw/master/LICENSE",
+        "parents": "@safeimnetz/app"
+    },
+    "react-native-typewriter@0.7.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/TaylorBriggs/react-native-typewriter",
+        "licenseUrl": "https://github.com/TaylorBriggs/react-native-typewriter/raw/master/LICENSE",
+        "parents": "@safeimnetz/app"
+    },
+    "react-native-vector-icons@10.0.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/oblador/react-native-vector-icons",
+        "licenseUrl": "https://github.com/oblador/react-native-vector-icons/raw/master/LICENSE",
+        "parents": "@safeimnetz/app"
+    },
+    "react-native@0.72.5": {
+        "licenses": "MIT",
+        "repository": "github:facebook/react-native",
+        "licenseUrl": "github:facebook/react-native",
+        "parents": "@safeimnetz/app"
+    },
+    "react@18.2.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/facebook/react",
+        "licenseUrl": "https://github.com/facebook/react/raw/master/LICENSE",
+        "parents": "@safeimnetz/app"
+    },
+    "rxjs@7.8.1": {
+        "licenses": "Apache-2.0",
+        "repository": "https://github.com/reactivex/rxjs",
+        "licenseUrl": "https://github.com/reactivex/rxjs/raw/master/LICENSE.txt",
+        "parents": "@safeimnetz/app"
+    }
+}
