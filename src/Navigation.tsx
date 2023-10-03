@@ -47,7 +47,11 @@ const Navigation = (props: {initialRouteName?: string}) => {
         <Stack.Screen name="Home" component={Home} options={{...mainHeaderOptions}} />
         <Stack.Screen name="TaskDetail" component={TaskDetail} />
         <Stack.Screen name="Settings" component={Settings} options={{title: 'Einstellungen'}} />
-        <Stack.Screen name="OpenSourceLicenses" component={OpenSourceLicenses} />
+        <Stack.Screen
+          name="OpenSourceLicenses"
+          component={OpenSourceLicenses}
+          options={{title: 'Open-Source Lizenzen'}}
+        />
         <Stack.Screen name="FilteredTaskList" component={FilteredTaskList} />
       </Stack.Navigator>
     </NavigationContainer>

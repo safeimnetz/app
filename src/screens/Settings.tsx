@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, Image, Linking, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Linking, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Config} from '../Config';
 import ListView from '../components/ListView';
@@ -54,7 +54,7 @@ const Settings = () => {
         {renderSettingsEntry({
           title: 'Open-Source Lizenzen',
           onPress: () => {
-            Alert.alert('TODO');
+            NavigationUtils.navigate('OpenSourceLicenses');
           },
         })}
         {renderSettingsEntry({
