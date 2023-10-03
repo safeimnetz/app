@@ -1,10 +1,11 @@
 import React from 'react';
-import {Image, Linking, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Config} from '../Config';
 import ListView from '../components/ListView';
 import ScrollViewBackSwipe from '../components/ScrollViewBackSwipe';
 import {Colors} from '../models/Colors';
+import {LinkingUtils} from '../utils/LinkingUtils';
 import {NavigationUtils} from '../utils/NavigationUtils';
 
 const Settings = () => {
@@ -49,7 +50,7 @@ const Settings = () => {
         {renderSettingsEntry({
           title: 'Über Safe im Netz',
           onPress: () => {
-            Linking.openURL(Config.websiteUrl);
+            LinkingUtils.openURL(Config.websiteUrl);
           },
         })}
         {renderSettingsEntry({
@@ -61,13 +62,13 @@ const Settings = () => {
         {renderSettingsEntry({
           title: 'Nutzungsbedingungen',
           onPress: () => {
-            Linking.openURL(Config.tosUrl);
+            LinkingUtils.openURL(Config.tosUrl);
           },
         })}
       </ListView>
 
       <View style={{paddingHorizontal: 30, paddingTop: 50}}>
-        <TouchableOpacity onPress={() => Linking.openURL(Config.gitHubLink)}>
+        <TouchableOpacity onPress={() => LinkingUtils.openURL(Config.gitHubLink)}>
           <Text style={{color: 'gray'}}>
             Wir ❤️ Open-Source. Deshalb ist 100% unserer Codebase öffentlich auf{' '}
             <Text style={{textDecorationLine: 'underline'}}>GitHub</Text> einsehbar.
@@ -75,12 +76,12 @@ const Settings = () => {
         </TouchableOpacity>
 
         <Text style={{color: 'gray', marginTop: 40}}>Eine Initiative der</Text>
-        <TouchableOpacity onPress={() => Linking.openURL(Config.htlWebsiteUrl)}>
+        <TouchableOpacity onPress={() => LinkingUtils.openURL(Config.htlWebsiteUrl)}>
           <Image source={require('./../assets/Logo_HTL.png')} style={{width: 150, height: 50}} resizeMode="contain" />
         </TouchableOpacity>
 
         <Text style={{color: 'gray', marginTop: 30}}>Umsetzung und Wartung</Text>
-        <TouchableOpacity onPress={() => Linking.openURL(Config.kropfItWebsiteUrl)}>
+        <TouchableOpacity onPress={() => LinkingUtils.openURL(Config.kropfItWebsiteUrl)}>
           <Image
             source={require('./../assets/Logo_Kropf_IT.png')}
             style={{width: 90, height: 55}}

@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Linking, Text, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ListView from '../components/ListView';
 import ScrollViewBackSwipe from '../components/ScrollViewBackSwipe';
 import {Colors} from '../models/Colors';
+import {LinkingUtils} from '../utils/LinkingUtils';
 
 interface License {
   name: string;
@@ -48,7 +49,7 @@ const OpenSourceLicenses = () => {
           return (
             <TouchableOpacity
               key={l.name}
-              onPress={() => Linking.openURL(l.licenseUrl)}
+              onPress={() => LinkingUtils.openURL(l.licenseUrl)}
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',

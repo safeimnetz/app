@@ -23,6 +23,12 @@
         "licenseUrl": "https://github.com/software-mansion/react-native-gesture-handler/raw/master/LICENSE",
         "parents": "@safeimnetz/app"
     },
+    "react-native-inappbrowser-reborn@3.7.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/proyecto26/react-native-inappbrowser",
+        "licenseUrl": "https://github.com/proyecto26/react-native-inappbrowser/raw/master/LICENSE",
+        "parents": "@safeimnetz/app"
+    },
     "react-native-linear-gradient@2.8.3": {
         "licenses": "MIT",
         "repository": "https://github.com/react-native-linear-gradient/react-native-linear-gradient",

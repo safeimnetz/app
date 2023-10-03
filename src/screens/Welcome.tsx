@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Alert, Linking, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import Animated, {FadeInDown} from 'react-native-reanimated';
 import TypeWriter from 'react-native-typewriter';
 import {Config} from '../Config';
@@ -7,6 +7,7 @@ import BouncyImage from '../components/BouncyImage';
 import Button from '../components/Button';
 import LogoGradient from '../components/LogoGradient';
 import {_taskService} from '../services/TaskService';
+import {LinkingUtils} from '../utils/LinkingUtils';
 import {NavigationUtils} from '../utils/NavigationUtils';
 
 const Welcome = () => {
@@ -26,7 +27,7 @@ const Welcome = () => {
   };
 
   const openTos = () => {
-    Linking.openURL(Config.tosUrl);
+    LinkingUtils.openURL(Config.tosUrl);
   };
 
   const [isLoading, setIsLoading] = useState(false);
