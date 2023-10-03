@@ -4,11 +4,14 @@ import {Config} from '../Config';
 import {Content} from '../models/Content';
 
 const AsyncStorageKeys = {
+  setupDone: 'setupDone',
   categoryIds: 'categoryIds',
 };
 
 class TaskService {
   public content = new BehaviorSubject<Content | null>(null);
+
+  // API
 
   public async loadContent() {
     try {
@@ -28,6 +31,19 @@ class TaskService {
       return null;
     }
   }
+
+  // Setup assistant
+
+  public async getSetupDone() {
+    const setupDone = await AsyncStorage.getItem(AsyncStorageKeys.setupDone);
+    return setupDone === 'true';
+  }
+
+  public async saveSetupDone(state: boolean) {
+    await AsyncStorage.setItem(AsyncStorageKeys.setupDone, state ? 'true' : 'false');
+  }
+
+  // Selected categories
 
   public async getSelectedCategoryIds() {
     const idsJson = await AsyncStorage.getItem(AsyncStorageKeys.categoryIds);

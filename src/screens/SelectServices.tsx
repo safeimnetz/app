@@ -14,14 +14,20 @@ const SelectServices = () => {
 
   useEffect(() => {
     getCurrentCategoryIds();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getCurrentCategoryIds = async () => {
     const currentCategories = await _taskService.getSelectedCategoryIds();
-    setSelectedCategories(currentCategories);
+    const currentAndMandatory = currentCategories.concat(categories.filter(c => c.mandatory).map(c => c.id));
+    setSelectedCategories(currentAndMandatory);
   };
 
   const toggleCategory = (id: number) => {
+    if (categories.find(c => c.id === id)?.mandatory) {
+      return;
+    }
+
     if (selectedCategories.includes(id)) {
       setSelectedCategories(cats => cats.filter(catId => catId !== id));
     } else {
@@ -31,6 +37,7 @@ const SelectServices = () => {
 
   const saveAndContinue = async () => {
     await _taskService.saveSelectedCategoryIds(selectedCategories);
+    await _taskService.saveSetupDone(true);
     NavigationUtils.navigateWithoutBack('Home' as never);
   };
 
@@ -46,8 +53,10 @@ const SelectServices = () => {
           return (
             <TouchableOpacity
               key={c.id}
+              activeOpacity={c.mandatory ? 0.5 : undefined}
               onPress={() => toggleCategory(c.id)}
               style={{
+                opacity: c.mandatory ? 0.5 : 1,
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
@@ -56,7 +65,7 @@ const SelectServices = () => {
               }}>
               <View style={{width: '90%'}}>
                 <Text style={{fontSize: 16}}>{c.title}</Text>
-                {c.subtitle && <Text style={{color: 'gray'}}>{c.subtitle}</Text>}
+                {c.subtitle && <Text style={{color: 'gray', marginTop: 2}}>{c.subtitle}</Text>}
               </View>
               <View
                 style={{
@@ -67,7 +76,7 @@ const SelectServices = () => {
                   borderColor: Colors.primary,
                   justifyContent: 'center',
                   alignItems: 'center',
-                  backgroundColor: isSelected ? Colors.primary : '#fff',
+                  backgroundColor: c.mandatory || isSelected ? Colors.primary : '#fff',
                 }}>
                 <Icon color="#fff" size={18} name="checkmark-outline" />
               </View>
