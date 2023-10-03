@@ -83,7 +83,7 @@ const Settings = () => {
         <TouchableOpacity onPress={() => Linking.openURL(Config.kropfItWebsiteUrl)}>
           <Image
             source={require('./../assets/Logo_Kropf_IT.png')}
-            style={{width: 90, height: 50}}
+            style={{width: 90, height: 55}}
             resizeMode="contain"
           />
         </TouchableOpacity>
