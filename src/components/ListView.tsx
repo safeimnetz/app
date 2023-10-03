@@ -1,6 +1,7 @@
 import React, {ReactNode} from 'react';
 import {View, ViewStyle} from 'react-native';
 
+const LIST_CONTAINER_PADDING = 20;
 const LIST_BORDER_RADIUS = 10;
 const LIST_ROW_DIVIDER_COLOR = '#eaeaea';
 const LIST_BACKGROUND_COLOR = '#ffffff';
@@ -27,7 +28,7 @@ const ListView = (props: {children: ReactNode | ReactNode[]; style?: ViewStyle})
     <View
       style={{
         width: '100%',
-        paddingHorizontal: 20,
+        paddingHorizontal: LIST_CONTAINER_PADDING,
         ...props.style,
       }}>
       <View style={{backgroundColor: LIST_BACKGROUND_COLOR, borderRadius: LIST_BORDER_RADIUS}}>

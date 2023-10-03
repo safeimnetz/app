@@ -42,7 +42,9 @@ const SelectServices = () => {
   };
 
   return (
-    <ScrollView style={{flex: 1, backgroundColor: '#F3F2F7'}} contentContainerStyle={{paddingTop: 20}}>
+    <ScrollView
+      style={{flex: 1, backgroundColor: Colors.scrollViewBackground}}
+      contentContainerStyle={{paddingTop: 20}}>
       <View style={{paddingHorizontal: 25}}>
         <Text style={{color: 'gray'}}>Wähle nun alle Dienste aus, die du verwendest.</Text>
       </View>

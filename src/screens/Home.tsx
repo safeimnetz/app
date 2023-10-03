@@ -1,17 +1,12 @@
 import React from 'react';
-import {Button, Text, View} from 'react-native';
-import {NavigationUtils} from '../utils/NavigationUtils';
+import {ScrollView} from 'react-native';
+import {Colors} from '../models/Colors';
 
 const Home = () => {
   return (
-    <View>
-      <Text>Home works!</Text>
-      <Button
-        title="services auswählen"
-        onPress={() => {
-          NavigationUtils.navigate('SelectServices');
-        }}></Button>
-    </View>
+    <ScrollView
+      style={{flex: 1, backgroundColor: Colors.scrollViewBackground}}
+      contentContainerStyle={{paddingTop: 20}}></ScrollView>
   );
 };
 

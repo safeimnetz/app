@@ -1,15 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Alert, Linking, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
-import Animated, {
-  Easing,
-  FadeInDown,
-  useAnimatedStyle,
-  useSharedValue,
-  withRepeat,
-  withSequence,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated, {FadeInDown} from 'react-native-reanimated';
 import TypeWriter from 'react-native-typewriter';
+import {Config} from '../Config';
+import BouncyImage from '../components/BouncyImage';
 import Button from '../components/Button';
 import LogoGradient from '../components/LogoGradient';
 import {_taskService} from '../services/TaskService';
@@ -32,27 +26,8 @@ const Welcome = () => {
   };
 
   const openTos = () => {
-    Linking.openURL('https://safeimnetz.at/nutzungsbedingungen.html');
+    Linking.openURL(Config.tosUrl);
   };
-
-  const translateY = useSharedValue(0);
-
-  useEffect(() => {
-    translateY.value = withRepeat(
-      withSequence(
-        withTiming(0, {duration: 2000, easing: Easing.inOut(Easing.sin)}),
-        withTiming(20, {duration: 2000, easing: Easing.inOut(Easing.sin)}),
-      ),
-      -1,
-      true,
-    );
-  }, [translateY]);
-
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{translateY: translateY.value}],
-    };
-  });
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -68,11 +43,12 @@ const Welcome = () => {
           alignItems: 'center',
           marginTop: 150,
         }}>
-        <Animated.Image
+        <BouncyImage
           entering={FadeInDown.duration(1000)}
           source={require('./../assets/Text_White.png')}
           resizeMode="contain"
-          style={[animatedStyle, {width: 300, height: 150}]}
+          width={300}
+          height={150}
         />
       </View>
 
