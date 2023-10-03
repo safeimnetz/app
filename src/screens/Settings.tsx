@@ -74,9 +74,18 @@ const Settings = () => {
           </Text>
         </TouchableOpacity>
 
-        <Text style={{color: 'gray', marginTop: 30}}>Eine Initiative der</Text>
+        <Text style={{color: 'gray', marginTop: 40}}>Eine Initiative der</Text>
         <TouchableOpacity onPress={() => Linking.openURL(Config.htlWebsiteUrl)}>
           <Image source={require('./../assets/Logo_HTL.png')} style={{width: 150, height: 50}} resizeMode="contain" />
+        </TouchableOpacity>
+
+        <Text style={{color: 'gray', marginTop: 30}}>Umsetzung und Wartung</Text>
+        <TouchableOpacity onPress={() => Linking.openURL(Config.kropfItWebsiteUrl)}>
+          <Image
+            source={require('./../assets/Logo_Kropf_IT.png')}
+            style={{width: 90, height: 50}}
+            resizeMode="contain"
+          />
         </TouchableOpacity>
       </View>
     </ScrollViewBackSwipe>

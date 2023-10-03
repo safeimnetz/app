@@ -4,4 +4,5 @@ export const Config = {
   tosUrl: 'https://safeimnetz.at/nutzungsbedingungen.html',
   gitHubLink: 'https://github.com/safeimnetz',
   htlWebsiteUrl: 'https://htl-kaindorf.at',
+  kropfItWebsiteUrl: 'https://kropf-it.at',
 };
