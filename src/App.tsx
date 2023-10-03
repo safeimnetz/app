@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, Alert, View} from 'react-native';
 import Navigation from './Navigation';
+import {Colors} from './models/Colors';
 import {_taskService} from './services/TaskService';
 
 const App = () => {
@@ -32,7 +33,7 @@ const App = () => {
   if (setupDone == null) {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator />
+        <ActivityIndicator color={Colors.primary} size="large" />
       </View>
     );
   }

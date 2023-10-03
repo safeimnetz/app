@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Button from '../components/Button';
 import ListView from '../components/ListView';
+import ScrollViewBackSwipe from '../components/ScrollViewBackSwipe';
 import {Colors} from '../models/Colors';
 import {_taskService} from '../services/TaskService';
 import {NavigationUtils} from '../utils/NavigationUtils';
@@ -42,7 +43,7 @@ const SelectServices = () => {
   };
 
   return (
-    <ScrollView
+    <ScrollViewBackSwipe
       style={{flex: 1, backgroundColor: Colors.scrollViewBackground}}
       contentContainerStyle={{paddingTop: 20}}>
       <View style={{paddingHorizontal: 25}}>
@@ -94,7 +95,7 @@ const SelectServices = () => {
           theme="primary"
         />
       </View>
-    </ScrollView>
+    </ScrollViewBackSwipe>
   );
 };
 

@@ -1,8 +1,9 @@
 import React from 'react';
-import {Image, Linking, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {Image, Linking, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Config} from '../Config';
 import ListView from '../components/ListView';
+import ScrollViewBackSwipe from '../components/ScrollViewBackSwipe';
 import {Colors} from '../models/Colors';
 import {NavigationUtils} from '../utils/NavigationUtils';
 
@@ -27,7 +28,7 @@ const Settings = () => {
   };
 
   return (
-    <ScrollView
+    <ScrollViewBackSwipe
       style={{flex: 1, backgroundColor: Colors.scrollViewBackground}}
       contentContainerStyle={{paddingTop: 20}}>
       <View style={{alignItems: 'center', paddingVertical: 10}}>
@@ -78,7 +79,7 @@ const Settings = () => {
           <Image source={require('./../assets/Logo_HTL.png')} style={{width: 150, height: 50}} resizeMode="contain" />
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </ScrollViewBackSwipe>
   );
 };
 

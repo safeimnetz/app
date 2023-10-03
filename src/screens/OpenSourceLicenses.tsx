@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {Linking, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {Linking, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ListView from '../components/ListView';
+import ScrollViewBackSwipe from '../components/ScrollViewBackSwipe';
 import {Colors} from '../models/Colors';
 
 interface License {
@@ -36,7 +37,7 @@ const OpenSourceLicenses = () => {
   };
 
   return (
-    <ScrollView
+    <ScrollViewBackSwipe
       style={{flex: 1, backgroundColor: Colors.scrollViewBackground}}
       contentContainerStyle={{paddingTop: 20, paddingBottom: 50}}>
       <View style={{paddingHorizontal: 25}}>
@@ -64,7 +65,7 @@ const OpenSourceLicenses = () => {
           );
         })}
       </ListView>
-    </ScrollView>
+    </ScrollViewBackSwipe>
   );
 };
 
