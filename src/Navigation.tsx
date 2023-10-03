@@ -11,6 +11,7 @@ import SelectServices from './screens/SelectServices';
 import Settings from './screens/Settings';
 import TaskDetail from './screens/TaskDetail';
 import Welcome from './screens/Welcome';
+import {NavigationUtils} from './utils/NavigationUtils';
 
 const Stack = createStackNavigator();
 
@@ -20,7 +21,7 @@ const mainHeaderOptions: StackNavigationOptions = {
   },
   headerTitle: () => {
     return (
-      <View>
+      <View pointerEvents="none">
         <Image source={require('./assets/Text_White.png')} resizeMode="contain" style={{width: 150}} />
       </View>
     );
@@ -34,7 +35,7 @@ const defaultHeaderOptions: StackNavigationOptions = {
 
 const Navigation = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={NavigationUtils.navigationRef}>
       <Stack.Navigator>
         <Stack.Screen name="Welcome" component={Welcome} options={{headerShown: false}} />
         <Stack.Screen
@@ -42,7 +43,7 @@ const Navigation = () => {
           component={SelectServices}
           options={{...defaultHeaderOptions, title: 'Dienste auswählen'}}
         />
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Home" component={Home} options={{...mainHeaderOptions}} />
         <Stack.Screen name="TaskDetail" component={TaskDetail} />
         <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="OpenSourceLicenses" component={OpenSourceLicenses} />

@@ -1,6 +1,5 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useEffect} from 'react';
-import {Linking, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Alert, Linking, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import Animated, {
   Easing,
   FadeInDown,
@@ -11,14 +10,25 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import TypeWriter from 'react-native-typewriter';
+import Button from '../components/Button';
 import LogoGradient from '../components/LogoGradient';
-import {Colors} from '../models/Colors';
+import {_taskService} from '../services/TaskService';
+import {NavigationUtils} from '../utils/NavigationUtils';
 
 const Welcome = () => {
-  const nav = useNavigation();
+  const next = async () => {
+    setIsLoading(true);
+    const content = await _taskService.loadContent();
+    setIsLoading(false);
 
-  const next = () => {
-    nav.navigate('SelectServices' as never);
+    if (content != null) {
+      NavigationUtils.navigate('SelectServices' as never);
+    } else {
+      Alert.alert(
+        'Keine Internetverbindung',
+        'Stelle sicher, dass du eine aktive Internetverbindung hast und versuche es erneut.',
+      );
+    }
   };
 
   const openTos = () => {
@@ -43,6 +53,8 @@ const Welcome = () => {
       transform: [{translateY: translateY.value}],
     };
   });
+
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <View style={{flex: 1}}>
@@ -92,19 +104,13 @@ const Welcome = () => {
           </Animated.View>
         </Animated.View>
         <Animated.View entering={FadeInDown.duration(1000).delay(4000)}>
-          <TouchableOpacity
+          <Button
+            style={{marginTop: 80}}
             onPress={() => next()}
-            style={{
-              height: 55,
-              width: '100%',
-              backgroundColor: 'white',
-              borderRadius: 10,
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: 80,
-            }}>
-            <Text style={{fontWeight: 'bold', fontSize: 17, color: Colors.primary}}>Los geht's</Text>
-          </TouchableOpacity>
+            title="Los geht's"
+            isLoading={isLoading}
+            theme="light"
+          />
           <TouchableOpacity onPress={() => openTos()}>
             <Text style={{color: 'white', fontSize: 12, textAlign: 'center', marginTop: 10}}>
               Damit akzeptierst du die <Text style={{textDecorationLine: 'underline'}}>Nutzungsbedingungen</Text>
