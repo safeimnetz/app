@@ -1,5 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import CircleProgressBar from '../components/CircleProgressBar';
 import ListView from '../components/ListView';
 import ScrollViewBackSwipe from '../components/ScrollViewBackSwipe';
 import {Colors} from '../models/Colors';
@@ -22,11 +24,19 @@ const Home = () => {
   return (
     <ScrollViewBackSwipe
       style={{flex: 1, backgroundColor: Colors.scrollViewBackground}}
-      contentContainerStyle={{paddingTop: 20}}>
-      <TouchableOpacity style={{paddingHorizontal: 25}}>
-        <Text style={{color: 'gray'}}>Erledigte Tasks anzeigen... (0)</Text>
-      </TouchableOpacity>
-      <ListView style={{marginVertical: 20}}>
+      contentContainerStyle={{paddingTop: 10}}>
+      <Text style={{paddingTop: 10, paddingHorizontal: 30, color: 'gray', textTransform: 'uppercase'}}>
+        Mein Security-Score
+      </Text>
+      <ListView style={{marginVertical: 10}}>
+        <View style={{paddingVertical: 10, justifyContent: 'center', alignItems: 'center'}}>
+          <CircleProgressBar percentage={65} />
+        </View>
+      </ListView>
+      <Text style={{paddingTop: 10, paddingHorizontal: 30, color: 'gray', textTransform: 'uppercase'}}>
+        Meine Tasks
+      </Text>
+      <ListView style={{marginVertical: 10}}>
         {tasks.map(t => {
           return (
             <TouchableOpacity
@@ -74,9 +84,23 @@ const Home = () => {
           );
         })}
       </ListView>
-      <TouchableOpacity style={{paddingHorizontal: 25, paddingBottom: 50}}>
-        <Text style={{color: 'gray'}}>Ignorierte Tasks anzeigen... (0)</Text>
-      </TouchableOpacity>
+      <Text style={{paddingTop: 10, paddingHorizontal: 30, color: 'gray', textTransform: 'uppercase'}}>Mehr</Text>
+      <ListView style={{marginVertical: 10, paddingBottom: 50}}>
+        <TouchableOpacity
+          onPress={() => {}}
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingHorizontal: 20,
+            paddingVertical: 12,
+          }}>
+          <View style={{width: '90%'}}>
+            <Text style={{fontSize: 16}}>Erledigte Tasks anzeigen... (0)</Text>
+          </View>
+          <Icon color={Colors.primary} size={18} name="chevron-forward-outline" />
+        </TouchableOpacity>
+      </ListView>
     </ScrollViewBackSwipe>
   );
 };

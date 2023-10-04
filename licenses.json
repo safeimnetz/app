@@ -53,6 +53,12 @@
         "licenseUrl": "https://github.com/software-mansion/react-native-screens/raw/master/LICENSE",
         "parents": "@safeimnetz/app"
     },
+    "react-native-svg@13.14.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-native-community/react-native-svg",
+        "licenseUrl": "https://github.com/react-native-community/react-native-svg/raw/master/LICENSE",
+        "parents": "@safeimnetz/app"
+    },
     "react-native-typewriter@0.7.0": {
         "licenses": "MIT",
         "repository": "https://github.com/TaylorBriggs/react-native-typewriter",

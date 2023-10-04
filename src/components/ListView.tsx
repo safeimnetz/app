@@ -31,7 +31,7 @@ const ListView = (props: {children: ReactNode | ReactNode[]; style?: ViewStyle})
         paddingHorizontal: LIST_CONTAINER_PADDING,
         ...props.style,
       }}>
-      <View style={{backgroundColor: LIST_BACKGROUND_COLOR, borderRadius: LIST_BORDER_RADIUS}}>
+      <View style={{backgroundColor: LIST_BACKGROUND_COLOR, borderRadius: LIST_BORDER_RADIUS, overflow: 'hidden'}}>
         {renderRows(children)}
       </View>
     </View>

@@ -1,7 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {StackNavigationOptions, createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {Image, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Colors} from './models/Colors';
 import FilteredTaskList from './screens/FilteredTaskList';
@@ -22,44 +22,18 @@ const defaultHeaderOptions: StackNavigationOptions = {
 
 const mainHeaderOptions: StackNavigationOptions = {
   ...defaultHeaderOptions,
-  header: () => {
+  headerTitle: () => {
     return (
-      <SafeAreaView style={{backgroundColor: '#fff'}}>
-        <View
-          style={{
-            width: '100%',
-            backgroundColor: '#fff',
-            borderColor: '#EBEAEC',
-            borderBottomWidth: 1,
-            flexDirection: 'column',
-            alignItems: 'center',
-            position: 'relative',
-          }}>
-          <View pointerEvents="none">
-            <Image
-              source={require('./assets/Text_Gradient.png')}
-              resizeMode="contain"
-              style={{width: 150, height: 45}}
-            />
-            <Text
-              style={{
-                fontWeight: 'bold',
-                fontSize: 17,
-                color: Colors.primary,
-                textAlign: 'center',
-                paddingTop: 5,
-                paddingBottom: 15,
-              }}>
-              Meine Tasks
-            </Text>
-          </View>
-          <TouchableOpacity
-            style={{position: 'absolute', right: 20, height: '100%', justifyContent: 'center'}}
-            onPress={() => NavigationUtils.navigate('Settings')}>
-            <Icon size={28} name="cog-outline" color={Colors.primary} />
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
+      <View pointerEvents="none">
+        <Image source={require('./assets/Text_Gradient.png')} resizeMode="contain" style={{width: 150}} />
+      </View>
+    );
+  },
+  headerRight: () => {
+    return (
+      <TouchableOpacity style={{paddingRight: 20}} onPress={() => NavigationUtils.navigate('Settings')}>
+        <Icon size={28} name="cog-outline" color={Colors.primary} />
+      </TouchableOpacity>
     );
   },
 };
