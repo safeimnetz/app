@@ -9,7 +9,7 @@ import {LinkingUtils} from '../utils/LinkingUtils';
 interface License {
   name: string;
   version: string;
-  licenseUrl: string;
+  repositoryUrl: string;
 }
 
 const OpenSourceLicenses = () => {
@@ -29,9 +29,9 @@ const OpenSourceLicenses = () => {
     for (const key of Object.keys(jsonLicenses)) {
       const version = key.match(numberRegex);
       const nameWithoutVersion = key.replace(atRegex, '').replace(version ? version[0] : '', '');
-      const url = jsonLicenses[key].licenseUrl;
+      const url = jsonLicenses[key].repository;
 
-      finalLicenses.push({name: nameWithoutVersion, version: version ? version[0] : '', licenseUrl: url});
+      finalLicenses.push({name: nameWithoutVersion, version: version ? version[0] : '', repositoryUrl: url});
     }
 
     setLicenses(finalLicenses);
@@ -49,7 +49,7 @@ const OpenSourceLicenses = () => {
           return (
             <TouchableOpacity
               key={l.name}
-              onPress={() => LinkingUtils.openURL(l.licenseUrl)}
+              onPress={() => LinkingUtils.openURL(l.repositoryUrl)}
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
