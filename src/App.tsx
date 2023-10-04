@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, Alert, View} from 'react-native';
+import {CopilotProvider} from 'react-native-copilot';
 import Navigation from './Navigation';
+import CustomStepNumberComponent from './components/copilot/CustomStepNumberComponent';
+import CustomTooltipComponent from './components/copilot/CustomTooltipComponent';
 import {Colors} from './models/Colors';
 import {_taskService} from './services/TaskService';
 
@@ -38,7 +41,11 @@ const App = () => {
     );
   }
 
-  return <Navigation initialRouteName={setupDone ? 'Home' : 'Welcome'} />;
+  return (
+    <CopilotProvider stepNumberComponent={CustomStepNumberComponent} tooltipComponent={CustomTooltipComponent}>
+      <Navigation initialRouteName={setupDone ? 'Home' : 'Welcome'} />
+    </CopilotProvider>
+  );
 };
 
 export default App;

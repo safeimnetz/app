@@ -2,7 +2,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import {StackNavigationOptions, createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {Image, TouchableOpacity, View} from 'react-native';
+import {CopilotStep} from 'react-native-copilot';
 import Icon from 'react-native-vector-icons/Ionicons';
+import CustomCopilotView from './components/copilot/CustomCopilotView';
 import {Colors} from './models/Colors';
 import FilteredTaskList from './screens/FilteredTaskList';
 import Home from './screens/Home';
@@ -32,7 +34,14 @@ const mainHeaderOptions: StackNavigationOptions = {
   headerRight: () => {
     return (
       <TouchableOpacity style={{paddingRight: 20}} onPress={() => NavigationUtils.navigate('Settings')}>
-        <Icon size={28} name="cog-outline" color={Colors.primary} />
+        <CopilotStep
+          order={3}
+          name="settings"
+          text="In den Einstellungen kannst du Dienste hinzufügen und entfernen. Außerdem kannst du mehr über die Safe im Netz App erfahren.">
+          <CustomCopilotView>
+            <Icon size={28} name="cog-outline" color={Colors.primary} />
+          </CustomCopilotView>
+        </CopilotStep>
       </TouchableOpacity>
     );
   },

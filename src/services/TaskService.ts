@@ -5,6 +5,7 @@ import {Content} from '../models/Content';
 
 const AsyncStorageKeys = {
   setupDone: 'setupDone',
+  inlineTutorialDone: 'inlineTutorialDone',
   categoryIds: 'categoryIds',
 };
 
@@ -43,6 +44,17 @@ class TaskService {
     await AsyncStorage.setItem(AsyncStorageKeys.setupDone, state ? 'true' : 'false');
   }
 
+  // Inline tutorial
+
+  public async getInlineTutorialDone() {
+    const inlineTutorialDone = await AsyncStorage.getItem(AsyncStorageKeys.inlineTutorialDone);
+    return inlineTutorialDone === 'true';
+  }
+
+  public async saveInlineTutorialDone(state: boolean) {
+    await AsyncStorage.setItem(AsyncStorageKeys.inlineTutorialDone, state ? 'true' : 'false');
+  }
+
   // Selected categories
 
   public async getSelectedCategoryIds() {
@@ -62,6 +74,7 @@ class TaskService {
   public async resetApp() {
     await this.saveSelectedCategoryIds([]);
     await this.saveSetupDone(false);
+    await this.saveInlineTutorialDone(false);
   }
 }
 

@@ -17,6 +17,12 @@
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "@safeimnetz/app"
     },
+    "react-native-copilot@3.2.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/mohebifar/react-native-copilot",
+        "licenseUrl": "https://github.com/mohebifar/react-native-copilot/raw/master/LICENSE",
+        "parents": "@safeimnetz/app"
+    },
     "react-native-gesture-handler@2.13.1": {
         "licenses": "MIT",
         "repository": "https://github.com/software-mansion/react-native-gesture-handler",
