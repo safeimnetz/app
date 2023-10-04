@@ -1,10 +1,11 @@
 import React from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, Image, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Config} from '../Config';
 import ListView from '../components/ListView';
 import ScrollViewBackSwipe from '../components/ScrollViewBackSwipe';
 import {Colors} from '../models/Colors';
+import {_taskService} from '../services/TaskService';
 import {LinkingUtils} from '../utils/LinkingUtils';
 import {NavigationUtils} from '../utils/NavigationUtils';
 
@@ -48,9 +49,23 @@ const Settings = () => {
           },
         })}
         {renderSettingsEntry({
-          title: 'Über Safe im Netz',
+          title: 'Tutorial neu starten',
           onPress: () => {
-            LinkingUtils.openURL(Config.websiteUrl);
+            Alert.alert(
+              'Tutorial neu starten?',
+              'Dadurch wird die App zurückgesetzt und es gehen die ausgewählten Dienste und erledigten Tasks verloren.',
+              [
+                {
+                  text: 'App zurücksetzen',
+                  style: 'destructive',
+                  onPress: async () => {
+                    await _taskService.resetApp();
+                    NavigationUtils.navigateWithoutBack('Welcome');
+                  },
+                },
+                {text: 'Abbrechen', style: 'cancel'},
+              ],
+            );
           },
         })}
         {renderSettingsEntry({
@@ -65,9 +80,15 @@ const Settings = () => {
             LinkingUtils.openURL(Config.tosUrl);
           },
         })}
+        {renderSettingsEntry({
+          title: 'Über Safe im Netz',
+          onPress: () => {
+            LinkingUtils.openURL(Config.websiteUrl);
+          },
+        })}
       </ListView>
 
-      <View style={{paddingHorizontal: 30, paddingTop: 50}}>
+      <View style={{paddingHorizontal: 30, paddingTop: 30}}>
         <TouchableOpacity onPress={() => LinkingUtils.openURL(Config.gitHubLink)}>
           <Text style={{color: 'gray'}}>
             Wir ❤️ Open-Source. Deshalb ist 100% unserer Codebase öffentlich auf{' '}

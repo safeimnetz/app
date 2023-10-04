@@ -18,7 +18,7 @@ const CircleProgressBar = (props: {percentage: number}) => {
     const animateProgress = () => {
       'worklet';
       animatedProgress.value = withTiming(progressOffset, {
-        duration: 1000,
+        duration: 2000,
         easing: Easing.out(Easing.exp),
       });
     };

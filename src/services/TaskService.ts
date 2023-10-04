@@ -56,6 +56,13 @@ class TaskService {
   public async saveSelectedCategoryIds(ids: number[]) {
     await AsyncStorage.setItem(AsyncStorageKeys.categoryIds, JSON.stringify(ids));
   }
+
+  // Reset app
+
+  public async resetApp() {
+    await this.saveSelectedCategoryIds([]);
+    await this.saveSetupDone(false);
+  }
 }
 
 export const _taskService = new TaskService();
