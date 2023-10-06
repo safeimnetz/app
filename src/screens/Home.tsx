@@ -6,22 +6,20 @@ import CircleProgressBar from '../components/CircleProgressBar';
 import ListView from '../components/ListView';
 import ScrollViewBackSwipe from '../components/ScrollViewBackSwipe';
 import CustomCopilotView from '../components/copilot/CustomCopilotView';
+import {useSubscribe} from '../hooks/useSubscribe';
 import {Colors} from '../models/Colors';
 import {_taskService} from '../services/TaskService';
 
 const Home = () => {
-  const categories = _taskService.content.value?.categories!;
-  const tasks = _taskService.content.value?.tasks!;
+  const content = useSubscribe(_taskService.content);
+  const selectedCategories = useSubscribe(_taskService.selectedCategories);
+  const readTaskIds = useSubscribe(_taskService.readTaskIds);
 
-  // const [tasks, setTasks] = useState<Task[]>([]);
+  const myTasks = content?.tasks.filter(t => selectedCategories?.includes(t.id));
+  const myUnreadTasks = myTasks?.filter(t => !readTaskIds?.includes(t.id));
+  const myReadTasks = myTasks?.filter(t => readTaskIds?.includes(t.id));
 
-  // useEffect(() => {
-  //   setMyTasks();
-  // }, []);
-
-  // const setMyTasks = async () => {
-  //   setTasks(_taskService.content.value?.tasks!);
-  // };
+  const securityScore = ((myReadTasks?.length ?? 0) / (myTasks?.length ?? 1)) * 100;
 
   const copilot = useCopilot();
 
@@ -60,7 +58,7 @@ const Home = () => {
         <CustomCopilotView>
           <ListView style={{marginVertical: 10}}>
             <View style={{paddingVertical: 10, justifyContent: 'center', alignItems: 'center'}}>
-              <CircleProgressBar percentage={65} />
+              <CircleProgressBar percentage={securityScore} />
             </View>
           </ListView>
         </CustomCopilotView>
@@ -74,7 +72,7 @@ const Home = () => {
         text="Willkommen! Hier findest du all deine Tasks, die du erledigen kannst, um vor Gefahren im Internet besser geschützt zu sein. Du kannst auf einen Task klicken, um ihn anzusehen und abzuschließen.">
         <CustomCopilotView>
           <ListView style={{marginVertical: 10}}>
-            {tasks.map(t => {
+            {myUnreadTasks?.map(t => {
               return (
                 <TouchableOpacity
                   key={t.id}
@@ -101,7 +99,7 @@ const Home = () => {
                         borderRadius: 7,
                       }}>
                       <Text style={{color: '#fff', fontWeight: '600'}}>
-                        {categories.find(c => c.id === t.categoryId)!.title}
+                        {content?.categories.find(c => c.id === t.categoryId)!.title}
                       </Text>
                     </View>
                   </View>
@@ -135,7 +133,7 @@ const Home = () => {
             paddingVertical: 12,
           }}>
           <View style={{width: '90%'}}>
-            <Text style={{fontSize: 16}}>Erledigte Tasks anzeigen... (0)</Text>
+            <Text style={{fontSize: 16}}>Erledigte Tasks anzeigen... ({myReadTasks?.length})</Text>
           </View>
           <Icon color={Colors.primary} size={18} name="chevron-forward-outline" />
         </TouchableOpacity>

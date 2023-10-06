@@ -27,6 +27,10 @@ const App = () => {
           'Stelle sicher, dass du eine aktive Internetverbindung hast und versuche es erneut.',
           [{text: 'Erneut versuchen', onPress: () => checkSetupState()}],
         );
+        return;
+      } else {
+        await _taskService.getSelectedCategoryIds();
+        await _taskService.getReadTaskIds();
       }
     }
 

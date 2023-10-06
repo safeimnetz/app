@@ -7,10 +7,13 @@ const AsyncStorageKeys = {
   setupDone: 'setupDone',
   inlineTutorialDone: 'inlineTutorialDone',
   categoryIds: 'categoryIds',
+  readTaskIds: 'readTaskIds',
 };
 
 class TaskService {
   public content = new BehaviorSubject<Content | null>(null);
+  public selectedCategories = new BehaviorSubject<number[]>([]);
+  public readTaskIds = new BehaviorSubject<number[]>([]);
 
   // API
 
@@ -62,11 +65,14 @@ class TaskService {
     if (idsJson == null) {
       return [];
     }
-    return JSON.parse(idsJson) as number[];
+    const ids = JSON.parse(idsJson) as number[];
+    this.selectedCategories.next(ids);
+    return ids;
   }
 
   public async saveSelectedCategoryIds(ids: number[]) {
     await AsyncStorage.setItem(AsyncStorageKeys.categoryIds, JSON.stringify(ids));
+    await this.getSelectedCategoryIds();
   }
 
   // Reset app
@@ -75,6 +81,30 @@ class TaskService {
     await this.saveSelectedCategoryIds([]);
     await this.saveSetupDone(false);
     await this.saveInlineTutorialDone(false);
+  }
+
+  // Read tasks
+
+  public async getReadTaskIds() {
+    const idsJson = await AsyncStorage.getItem(AsyncStorageKeys.readTaskIds);
+    if (idsJson == null) {
+      return [];
+    }
+    const ids = JSON.parse(idsJson) as number[];
+    this.readTaskIds.next(ids);
+    return ids;
+  }
+
+  public async toggleReadTask(taskId: number) {
+    let ids = await this.getReadTaskIds();
+    if (ids.includes(taskId)) {
+      ids = ids.filter(i => i !== taskId);
+    } else {
+      ids.concat(taskId);
+    }
+
+    await AsyncStorage.setItem(AsyncStorageKeys.readTaskIds, JSON.stringify(ids));
+    this.readTaskIds.next(ids);
   }
 }
 
