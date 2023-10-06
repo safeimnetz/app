@@ -6,9 +6,9 @@ import {CopilotStep} from 'react-native-copilot';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CustomCopilotView from './components/copilot/CustomCopilotView';
 import {Colors} from './models/Colors';
-import FilteredTaskList from './screens/FilteredTaskList';
 import Home from './screens/Home';
 import OpenSourceLicenses from './screens/OpenSourceLicenses';
+import ReadTasks from './screens/ReadTasks';
 import SelectServices from './screens/SelectServices';
 import Settings from './screens/Settings';
 import TaskDetail from './screens/TaskDetail';
@@ -61,7 +61,7 @@ const Navigation = (props: {initialRouteName?: string}) => {
           component={OpenSourceLicenses}
           options={{title: 'Open-Source Lizenzen'}}
         />
-        <Stack.Screen name="FilteredTaskList" component={FilteredTaskList} />
+        <Stack.Screen name="ReadTasks" component={ReadTasks} options={{title: 'Erledigte Tasks'}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

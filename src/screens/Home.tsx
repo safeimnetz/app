@@ -5,10 +5,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import CircleProgressBar from '../components/CircleProgressBar';
 import ListView from '../components/ListView';
 import ScrollViewBackSwipe from '../components/ScrollViewBackSwipe';
+import TaskEntry from '../components/TaskEntry';
 import CustomCopilotView from '../components/copilot/CustomCopilotView';
 import {useSubscribe} from '../hooks/useSubscribe';
 import {Colors} from '../models/Colors';
 import {_taskService} from '../services/TaskService';
+import {NavigationUtils} from '../utils/NavigationUtils';
 
 const Home = () => {
   const content = useSubscribe(_taskService.content);
@@ -17,9 +19,9 @@ const Home = () => {
 
   const myTasks = content?.tasks.filter(t => selectedCategories?.includes(t.id));
   const myUnreadTasks = myTasks?.filter(t => !readTaskIds?.includes(t.id));
-  const myReadTasks = myTasks?.filter(t => readTaskIds?.includes(t.id));
+  const readTasks = content?.tasks?.filter(t => readTaskIds?.includes(t.id));
 
-  const securityScore = ((myReadTasks?.length ?? 0) / (myTasks?.length ?? 1)) * 100;
+  const securityScore = ((readTasks?.length ?? 0) / (myTasks?.length ?? 1)) * 100;
 
   const copilot = useCopilot();
 
@@ -71,12 +73,18 @@ const Home = () => {
         name="tasks"
         text="Willkommen! Hier findest du all deine Tasks, die du erledigen kannst, um vor Gefahren im Internet besser geschützt zu sein. Du kannst auf einen Task klicken, um ihn anzusehen und abzuschließen.">
         <CustomCopilotView>
-          <ListView style={{marginVertical: 10}}>
-            {myUnreadTasks?.map(t => {
-              return (
-                <TouchableOpacity
-                  key={t.id}
-                  onPress={() => {}}
+          <View>
+            {myUnreadTasks != null && myUnreadTasks.length > 0 && (
+              <ListView style={{marginVertical: 10}}>
+                {myUnreadTasks?.map(t => {
+                  return <TaskEntry key={t.id} task={t} />;
+                })}
+              </ListView>
+            )}
+
+            {(myUnreadTasks == null || myUnreadTasks?.length === 0) && (
+              <ListView style={{marginVertical: 10}}>
+                <View
                   style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',
@@ -85,46 +93,18 @@ const Home = () => {
                     paddingVertical: 12,
                   }}>
                   <View style={{width: '90%'}}>
-                    <Text style={{fontSize: 17}}>{t.title}</Text>
-                    <Text style={{color: 'gray', marginTop: 5}}>{t.desc}</Text>
-                    <View
-                      style={{
-                        marginTop: 10,
-                        paddingHorizontal: 10,
-                        paddingVertical: 4,
-                        backgroundColor: Colors.primary,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        alignSelf: 'flex-start',
-                        borderRadius: 7,
-                      }}>
-                      <Text style={{color: '#fff', fontWeight: '600'}}>
-                        {content?.categories.find(c => c.id === t.categoryId)!.title}
-                      </Text>
-                    </View>
+                    <Text style={{fontSize: 16, color: 'gray'}}>Alles erledigt!</Text>
                   </View>
-                  <View
-                    style={{
-                      width: 25,
-                      height: 25,
-                      borderRadius: 100,
-                      borderWidth: 1.5,
-                      borderColor: Colors.primary,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    {/* <Icon color="#fff" size={18} name="checkmark-outline" /> */}
-                  </View>
-                </TouchableOpacity>
-              );
-            })}
-          </ListView>
+                </View>
+              </ListView>
+            )}
+          </View>
         </CustomCopilotView>
       </CopilotStep>
       <Text style={{paddingTop: 10, paddingHorizontal: 30, color: 'gray', textTransform: 'uppercase'}}>Mehr</Text>
       <ListView style={{marginVertical: 10, paddingBottom: 50}}>
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={() => NavigationUtils.navigate('ReadTasks')}
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -133,7 +113,7 @@ const Home = () => {
             paddingVertical: 12,
           }}>
           <View style={{width: '90%'}}>
-            <Text style={{fontSize: 16}}>Erledigte Tasks anzeigen... ({myReadTasks?.length})</Text>
+            <Text style={{fontSize: 16}}>Erledigte Tasks anzeigen... ({readTasks?.length})</Text>
           </View>
           <Icon color={Colors.primary} size={18} name="chevron-forward-outline" />
         </TouchableOpacity>
