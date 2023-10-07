@@ -16,13 +16,12 @@ import {NavigationUtils} from '../utils/NavigationUtils';
 
 const TaskDetail = ({route}: {route: any}) => {
   const content = useSubscribe(_taskService.content);
-  const readTaskIds = useSubscribe(_taskService.readTaskIds);
 
   const [task, setTask] = useState<Task | undefined>();
   const [infoContent, setInfoContent] = useState<string | undefined>();
   const [tutorialContent, setTutorialContent] = useState<string | undefined>();
 
-  const isDone = readTaskIds?.includes(task?.id ?? 0);
+  const [isDone, setIsDone] = useState(false);
 
   const nav = useNavigation();
 
@@ -36,6 +35,7 @@ const TaskDetail = ({route}: {route: any}) => {
       const foundTask = _taskService.content.value!.tasks.find(t => t.id === taskId);
       if (foundTask != null) {
         setTask(foundTask);
+        getReadStatus(foundTask);
         loadContent(foundTask);
       }
     }
@@ -54,6 +54,11 @@ const TaskDetail = ({route}: {route: any}) => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nav, isDone, task]);
+
+  const getReadStatus = (newTask: Task) => {
+    const isDoneDb = _taskService.readTaskIds.value?.includes(newTask.id) ?? false;
+    setIsDone(isDoneDb);
+  };
 
   const loadContent = async (newTask: Task) => {
     const info = await _taskService.loadHtml(newTask.infoContentUrl);
@@ -76,7 +81,9 @@ const TaskDetail = ({route}: {route: any}) => {
       confettiRef.current?.start();
     }
 
-    await _taskService.toggleReadTask(task?.id!);
+    setIsDone(!isDone);
+
+    _taskService.toggleReadTask(task?.id!);
   };
 
   return (
