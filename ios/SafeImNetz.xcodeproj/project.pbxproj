@@ -486,6 +486,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 100001;
+				DEVELOPMENT_TEAM = 8TS77B7LU7;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SafeImNetz/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Safe im Netz";
@@ -500,7 +501,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = at.fakesafeimnetz.app;
+				PRODUCT_BUNDLE_IDENTIFIER = at.safeimnetz.app;
 				PRODUCT_NAME = SafeImNetz;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -515,6 +516,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 100001;
+				DEVELOPMENT_TEAM = 8TS77B7LU7;
 				INFOPLIST_FILE = SafeImNetz/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Safe im Netz";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
@@ -528,7 +530,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = at.fakesafeimnetz.app;
+				PRODUCT_BUNDLE_IDENTIFIER = at.safeimnetz.app;
 				PRODUCT_NAME = SafeImNetz;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -608,7 +610,8 @@
 					"$(inherited)",
 					"-Wl",
 					"-ld_classic",
-					"-Wl -ld_classic ",
+					"-Wl",
+					"-ld_classic",
 				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
@@ -683,7 +686,8 @@
 					"$(inherited)",
 					"-Wl",
 					"-ld_classic",
-					"-Wl -ld_classic ",
+					"-Wl",
+					"-ld_classic",
 				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
