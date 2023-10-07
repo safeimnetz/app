@@ -1,6 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {ActivityIndicator, Alert, Text, TouchableOpacity, View, useWindowDimensions} from 'react-native';
+import RenderHtml from 'react-native-render-html';
 import Button from '../components/Button';
 import CategoryTag from '../components/CategoryTag';
 import ListView from '../components/ListView';
@@ -10,16 +11,21 @@ import {useSubscribe} from '../hooks/useSubscribe';
 import {Colors} from '../models/Colors';
 import {Task} from '../models/Task';
 import {_taskService} from '../services/TaskService';
+import {NavigationUtils} from '../utils/NavigationUtils';
 
 const TaskDetail = ({route}: {route: any}) => {
   const content = useSubscribe(_taskService.content);
   const readTaskIds = useSubscribe(_taskService.readTaskIds);
 
   const [task, setTask] = useState<Task | undefined>();
+  const [infoContent, setInfoContent] = useState<string | undefined>();
+  const [tutorialContent, setTutorialContent] = useState<string | undefined>();
 
   const isDone = readTaskIds?.includes(task?.id ?? 0);
 
   const nav = useNavigation();
+
+  const {width} = useWindowDimensions();
 
   useEffect(() => {
     if (route.params?.taskId != null) {
@@ -27,6 +33,7 @@ const TaskDetail = ({route}: {route: any}) => {
       const foundTask = _taskService.content.value!.tasks.find(t => t.id === taskId);
       if (foundTask != null) {
         setTask(foundTask);
+        loadContent(foundTask);
       }
     }
   }, [route.params]);
@@ -45,6 +52,22 @@ const TaskDetail = ({route}: {route: any}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nav, isDone, task]);
 
+  const loadContent = async (newTask: Task) => {
+    const info = await _taskService.loadHtml(newTask.infoContentUrl);
+    const tutorial = await _taskService.loadHtml(newTask.tutorialContentUrl);
+
+    if (info != null && tutorial != null) {
+      setInfoContent(info);
+      setTutorialContent(tutorial);
+    } else {
+      Alert.alert(
+        'Keine Internetverbindung',
+        'Um einen Task anzuzeigen wird eine aktive Internetverbindung benötigt. Stelle sicher, dass du online bist und versuche es erneut.',
+      );
+      NavigationUtils.goBack();
+    }
+  };
+
   const toggleReadStatus = async () => {
     await _taskService.toggleReadTask(task?.id!);
   };
@@ -53,8 +76,8 @@ const TaskDetail = ({route}: {route: any}) => {
     <ScrollViewBackSwipe
       style={{flex: 1, backgroundColor: Colors.scrollViewBackground}}
       contentContainerStyle={{paddingTop: 10}}>
-      {task != null && (
-        <ListView style={{marginVertical: 10}}>
+      {task != null && infoContent != null && tutorialContent != null && (
+        <ListView style={{marginVertical: 10, paddingBottom: 40}}>
           <View
             style={{
               flexDirection: 'column',
@@ -65,7 +88,14 @@ const TaskDetail = ({route}: {route: any}) => {
             <Text style={{fontSize: 18, fontWeight: '600'}}>{task?.title}</Text>
             <CategoryTag text={content?.categories.find(c => c.id === task?.categoryId)!.title} />
           </View>
-          <View style={{paddingHorizontal: 20, paddingVertical: 20}}></View>
+          <View style={{paddingHorizontal: 20, paddingTop: 10, paddingBottom: 20}}>
+            <Text style={{fontSize: 16, fontWeight: '600', marginBottom: 10}}>Information</Text>
+            <RenderHtml contentWidth={width} source={{html: infoContent}} />
+          </View>
+          <View style={{paddingHorizontal: 20, paddingTop: 10, paddingBottom: 20}}>
+            <Text style={{fontSize: 16, fontWeight: '600', marginBottom: 10}}>Tutorial </Text>
+            <RenderHtml contentWidth={width} source={{html: tutorialContent}} />
+          </View>
           <View style={{paddingHorizontal: 20, paddingVertical: 20}}>
             <Button
               title={isDone ? 'Als ungelesen markieren' : 'Als gelesen markieren'}
@@ -75,6 +105,11 @@ const TaskDetail = ({route}: {route: any}) => {
             />
           </View>
         </ListView>
+      )}
+      {(task == null || infoContent == null || tutorialContent == null) && (
+        <View style={{alignItems: 'center', paddingTop: 50}}>
+          <ActivityIndicator color={Colors.primary} />
+        </View>
       )}
     </ScrollViewBackSwipe>
   );

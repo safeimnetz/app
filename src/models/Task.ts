@@ -1,7 +1,8 @@
 export interface Task {
   id: number;
   categoryId: number;
-  contentUrl: string;
+  infoContentUrl: string;
+  tutorialContentUrl: string;
   title: string;
   desc: string;
 }

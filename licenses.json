@@ -47,6 +47,12 @@
         "licenseUrl": "https://github.com/software-mansion/react-native-reanimated/raw/master/LICENSE",
         "parents": "@safeimnetz/app"
     },
+    "react-native-render-html@6.3.4": {
+        "licenses": "BSD-2-Clause",
+        "repository": "https://github.com/meliorence/react-native-render-html",
+        "licenseUrl": "https://github.com/meliorence/react-native-render-html",
+        "parents": "@safeimnetz/app"
+    },
     "react-native-safe-area-context@4.7.2": {
         "licenses": "MIT",
         "repository": "https://github.com/th3rdwave/react-native-safe-area-context",

@@ -36,6 +36,21 @@ class TaskService {
     }
   }
 
+  public async loadHtml(route: string) {
+    try {
+      const res = await fetch(Config.baseUrl + route);
+      if (res.status !== 200) {
+        throw new Error('Status was not 200');
+      }
+
+      const text = await res.text();
+      return text;
+    } catch (e: any) {
+      console.log('Fetch failed with error: ' + e);
+      return null;
+    }
+  }
+
   // Setup assistant
 
   public async getSetupDone() {
