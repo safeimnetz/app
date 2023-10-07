@@ -54,7 +54,7 @@ const Navigation = (props: {initialRouteName?: string}) => {
         <Stack.Screen name="Welcome" component={Welcome} options={{headerShown: false}} />
         <Stack.Screen name="SelectServices" component={SelectServices} options={{title: 'Dienste auswählen'}} />
         <Stack.Screen name="Home" component={Home} options={{...mainHeaderOptions}} />
-        <Stack.Screen name="TaskDetail" component={TaskDetail} />
+        <Stack.Screen name="TaskDetail" component={TaskDetail} options={{title: 'Task ansehen'}} />
         <Stack.Screen name="Settings" component={Settings} options={{title: 'Einstellungen'}} />
         <Stack.Screen
           name="OpenSourceLicenses"

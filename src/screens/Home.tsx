@@ -17,11 +17,11 @@ const Home = () => {
   const selectedCategories = useSubscribe(_taskService.selectedCategories);
   const readTaskIds = useSubscribe(_taskService.readTaskIds);
 
-  const myTasks = content?.tasks.filter(t => selectedCategories?.includes(t.id));
+  const myTasks = content?.tasks.filter(t => selectedCategories?.includes(t.categoryId));
   const myUnreadTasks = myTasks?.filter(t => !readTaskIds?.includes(t.id));
   const readTasks = content?.tasks?.filter(t => readTaskIds?.includes(t.id));
 
-  const securityScore = ((readTasks?.length ?? 0) / (myTasks?.length ?? 1)) * 100;
+  const securityScore = (((myTasks?.length ?? 1) - (myUnreadTasks?.length ?? 0)) / (myTasks?.length ?? 1)) * 100;
 
   const copilot = useCopilot();
 

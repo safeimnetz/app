@@ -58,7 +58,7 @@ const CircleProgressBar = (props: {percentage: number}) => {
         />
       </Svg>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>{`${props.percentage}%`}</Text>
+        <Text style={styles.text}>{`${props.percentage.toFixed(0)}%`}</Text>
       </View>
     </View>
   );

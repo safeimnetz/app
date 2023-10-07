@@ -100,7 +100,7 @@ class TaskService {
     if (ids.includes(taskId)) {
       ids = ids.filter(i => i !== taskId);
     } else {
-      ids.concat(taskId);
+      ids = ids.concat(taskId);
     }
 
     await AsyncStorage.setItem(AsyncStorageKeys.readTaskIds, JSON.stringify(ids));
