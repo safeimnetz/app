@@ -96,6 +96,7 @@ class TaskService {
     await this.saveSelectedCategoryIds([]);
     await this.saveSetupDone(false);
     await this.saveInlineTutorialDone(false);
+    await this.resetReadTaskIds();
   }
 
   // Read tasks
@@ -108,6 +109,11 @@ class TaskService {
     const ids = JSON.parse(idsJson) as number[];
     this.readTaskIds.next(ids);
     return ids;
+  }
+
+  public async resetReadTaskIds() {
+    await AsyncStorage.setItem(AsyncStorageKeys.readTaskIds, JSON.stringify([]));
+    await this.getReadTaskIds();
   }
 
   public async toggleReadTask(taskId: number) {
