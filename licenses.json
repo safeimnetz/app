@@ -17,6 +17,11 @@
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "@safeimnetz/app"
     },
+    "react-native-confetti-cannon@1.5.2": {
+        "licenses": "UNKNOWN",
+        "licenseUrl": "https://github.com/vincentcatillon/react-native-confetti-cannon",
+        "parents": "@safeimnetz/app"
+    },
     "react-native-copilot@3.2.1": {
         "licenses": "MIT",
         "repository": "https://github.com/mohebifar/react-native-copilot",
