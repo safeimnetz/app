@@ -18,8 +18,7 @@ const TaskDetail = ({route}: {route: any}) => {
   const content = useSubscribe(_taskService.content);
 
   const [task, setTask] = useState<Task | undefined>();
-  const [infoContent, setInfoContent] = useState<string | undefined>();
-  const [tutorialContent, setTutorialContent] = useState<string | undefined>();
+  const [htmlContent, setHtmlContent] = useState<string | undefined>();
 
   const [isDone, setIsDone] = useState(false);
 
@@ -36,7 +35,7 @@ const TaskDetail = ({route}: {route: any}) => {
       if (foundTask != null) {
         setTask(foundTask);
         getReadStatus(foundTask);
-        loadContent(foundTask);
+        loadHtml(foundTask);
       }
     }
   }, [route.params]);
@@ -60,13 +59,11 @@ const TaskDetail = ({route}: {route: any}) => {
     setIsDone(isDoneDb);
   };
 
-  const loadContent = async (newTask: Task) => {
-    const info = await _taskService.loadHtml(newTask.infoContentUrl);
-    const tutorial = await _taskService.loadHtml(newTask.tutorialContentUrl);
+  const loadHtml = async (newTask: Task) => {
+    const html = await _taskService.loadHtml(newTask.contentUrl);
 
-    if (info != null && tutorial != null) {
-      setInfoContent(info);
-      setTutorialContent(tutorial);
+    if (html != null) {
+      setHtmlContent(html);
     } else {
       Alert.alert(
         'Keine Internetverbindung',
@@ -91,7 +88,7 @@ const TaskDetail = ({route}: {route: any}) => {
       <ScrollViewBackSwipe
         style={{flex: 1, backgroundColor: Colors.scrollViewBackground}}
         contentContainerStyle={{paddingTop: 10}}>
-        {task != null && infoContent != null && tutorialContent != null && (
+        {task != null && htmlContent != null && (
           <ListView style={{marginVertical: 10, paddingBottom: 40}}>
             <View
               style={{
@@ -103,13 +100,8 @@ const TaskDetail = ({route}: {route: any}) => {
               <Text style={{fontSize: 18, fontWeight: '600'}}>{task?.title}</Text>
               <CategoryTag text={content?.categories.find(c => c.id === task?.categoryId)!.title} />
             </View>
-            <View style={{paddingHorizontal: 20, paddingTop: 10, paddingBottom: 20}}>
-              <Text style={{fontSize: 16, fontWeight: '600', marginBottom: 10}}>Information</Text>
-              <RenderHtml contentWidth={width} source={{html: infoContent}} />
-            </View>
-            <View style={{paddingHorizontal: 20, paddingTop: 10, paddingBottom: 20}}>
-              <Text style={{fontSize: 16, fontWeight: '600', marginBottom: 10}}>Tutorial </Text>
-              <RenderHtml contentWidth={width} source={{html: tutorialContent}} />
+            <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
+              <RenderHtml contentWidth={width} source={{html: htmlContent}} />
             </View>
             <View style={{paddingHorizontal: 20, paddingVertical: 20}}>
               <Button
@@ -121,7 +113,7 @@ const TaskDetail = ({route}: {route: any}) => {
             </View>
           </ListView>
         )}
-        {(task == null || infoContent == null || tutorialContent == null) && (
+        {(task == null || htmlContent == null) && (
           <View style={{alignItems: 'center', paddingTop: 50}}>
             <ActivityIndicator color={Colors.primary} />
           </View>
