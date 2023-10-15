@@ -101,7 +101,7 @@ const TaskDetail = ({route}: {route: any}) => {
               <CategoryTag text={content?.categories.find(c => c.id === task?.categoryId)!.title} />
             </View>
             <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
-              <RenderHtml contentWidth={width} source={{html: htmlContent}} />
+              <RenderHtml contentWidth={width - 100} source={{html: htmlContent}} />
             </View>
             <View style={{paddingHorizontal: 20, paddingVertical: 20}}>
               <Button
