@@ -11,7 +11,7 @@ const AsyncStorageKeys = {
 };
 
 const GlobalHeaders = {
-  pragma: 'no-cache',
+  Pragma: 'no-cache',
   'Cache-Control': 'no-cache',
 };
 
