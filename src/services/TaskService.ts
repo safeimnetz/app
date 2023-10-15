@@ -10,6 +10,11 @@ const AsyncStorageKeys = {
   readTaskIds: 'readTaskIds',
 };
 
+const GlobalHeaders = {
+  pragma: 'no-cache',
+  'Cache-Control': 'no-cache',
+};
+
 class TaskService {
   public content = new BehaviorSubject<Content | null>(null);
   public selectedCategories = new BehaviorSubject<number[]>([]);
@@ -19,7 +24,7 @@ class TaskService {
 
   public async loadContent() {
     try {
-      const res = await fetch(Config.baseUrl + '/content.json');
+      const res = await fetch(Config.baseUrl + '/content.json', {headers: GlobalHeaders});
       if (res.status !== 200) {
         throw new Error('Status was not 200');
       }
@@ -38,7 +43,7 @@ class TaskService {
 
   public async loadHtml(route: string) {
     try {
-      const res = await fetch(Config.baseUrl + route);
+      const res = await fetch(Config.baseUrl + route, {headers: GlobalHeaders});
       if (res.status !== 200) {
         throw new Error('Status was not 200');
       }
