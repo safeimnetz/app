@@ -78,8 +78,8 @@ android {
         applicationId "at.safeimnetz.app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 101001
-        versionName "1.0.1"
+        versionCode 102001
+        versionName "1.0.2"
     }
     signingConfigs {
         debug {
