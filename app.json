@@ -31,7 +31,7 @@
     },
     "android": {
       "package": "at.safeimnetz.app",
-      "versionCode": 102101,
+      "versionCode": 103001,
       "adaptiveIcon": {
         "foregroundImage": "./assets/android-adaptive-foreground.png",
         "backgroundImage": "./assets/android-adaptive-background.png"
