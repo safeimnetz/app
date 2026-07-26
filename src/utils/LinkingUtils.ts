@@ -1,12 +1,12 @@
 import {Linking} from 'react-native';
-import InAppBrowser from 'react-native-inappbrowser-reborn';
+import * as WebBrowser from 'expo-web-browser';
 
 export class LinkingUtils {
   public static async openURL(url: string) {
-    if (await InAppBrowser.isAvailable()) {
-      InAppBrowser.open(url);
-    } else {
-      Linking.openURL(url);
+    try {
+      await WebBrowser.openBrowserAsync(url);
+    } catch {
+      await Linking.openURL(url);
     }
   }
 }

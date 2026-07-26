@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 
-const CustomCopilotView = (props: {children: JSX.Element; copilot?: any}) => {
+const CustomCopilotView = (props: {children: React.ReactElement; copilot?: any}) => {
   return <View {...props.copilot}>{props.children}</View>;
 };
 

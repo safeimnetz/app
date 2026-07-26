@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {ImageProps} from 'react-native';
 import Animated, {
-  AnimateProps,
+  AnimatedProps,
   Easing,
   useAnimatedStyle,
   useSharedValue,
@@ -10,7 +10,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-const BouncyImage = (props: AnimateProps<ImageProps> & ImageProps) => {
+const BouncyImage = (props: AnimatedProps<ImageProps> & ImageProps) => {
   const translateY = useSharedValue(0);
 
   useEffect(() => {

@@ -26,7 +26,7 @@ const TaskDetail = ({route}: {route: any}) => {
 
   const {width} = useWindowDimensions();
 
-  const confettiRef = useRef<any | null>();
+  const confettiRef = useRef<any | null>(null);
 
   useEffect(() => {
     if (route.params?.taskId != null) {

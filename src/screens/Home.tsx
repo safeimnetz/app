@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {CopilotStep, useCopilot} from 'react-native-copilot';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {Ionicons as Icon} from '@expo/vector-icons';
 import CircleProgressBar from '../components/CircleProgressBar';
 import ListView from '../components/ListView';
 import ScrollViewBackSwipe from '../components/ScrollViewBackSwipe';

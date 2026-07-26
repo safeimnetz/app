@@ -1,6 +1,6 @@
 import React from 'react';
 import {Alert, Image, Text, TouchableOpacity, View} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {Ionicons as Icon} from '@expo/vector-icons';
 import {Config} from '../Config';
 import ListView from '../components/ListView';
 import ScrollViewBackSwipe from '../components/ScrollViewBackSwipe';

@@ -1,4 +1,51 @@
 {
-  "name": "SafeImNetz",
-  "displayName": "SafeImNetz"
+  "expo": {
+    "name": "Safe im Netz",
+    "slug": "safe-im-netz",
+    "version": "1.0.2",
+    "icon": "./assets/icon-android.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "bundleIdentifier": "at.safeimnetz.app",
+      "buildNumber": "102001",
+      "icon": "./assets/icon-ios.png",
+      "requireFullScreen": true,
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSExceptionDomains": {
+            "localhost": {
+              "NSExceptionAllowsInsecureHTTPLoads": true
+            }
+          }
+        },
+        "NSLocationWhenInUseUsageDescription": "",
+        "UISupportedInterfaceOrientations": ["UIInterfaceOrientationPortrait"],
+        "UISupportedInterfaceOrientations~ipad": [
+          "UIInterfaceOrientationLandscapeLeft",
+          "UIInterfaceOrientationLandscapeRight",
+          "UIInterfaceOrientationPortrait"
+        ],
+        "UIViewControllerBasedStatusBarAppearance": false
+      }
+    },
+    "android": {
+      "package": "at.safeimnetz.app",
+      "versionCode": 102101,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/android-adaptive-foreground.png",
+        "backgroundImage": "./assets/android-adaptive-background.png"
+      }
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FFFFFF"
+        }
+      ],
+      "expo-web-browser",
+      "expo-font"
+    ]
+  }
 }

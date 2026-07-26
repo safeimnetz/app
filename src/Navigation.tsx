@@ -3,7 +3,7 @@ import {StackNavigationOptions, createStackNavigator} from '@react-navigation/st
 import React from 'react';
 import {Image, TouchableOpacity, View} from 'react-native';
 import {CopilotStep} from 'react-native-copilot';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {Ionicons as Icon} from '@expo/vector-icons';
 import CustomCopilotView from './components/copilot/CustomCopilotView';
 import {Colors} from './models/Colors';
 import Home from './screens/Home';
