@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {ImageProps} from 'react-native';
+import {Image, ImageProps} from 'react-native';
 import Animated, {
   AnimatedProps,
   Easing,
@@ -31,12 +31,11 @@ const BouncyImage = (props: AnimatedProps<ImageProps> & ImageProps) => {
   });
 
   return (
-    <Animated.Image
-      entering={props.entering}
-      source={props.source}
-      resizeMode="contain"
-      style={[animatedStyle, {width: props.width, height: props.height}]}
-    />
+    <Animated.View entering={props.entering}>
+      <Animated.View style={[animatedStyle, {width: props.width, height: props.height}]}>
+        <Image source={props.source} resizeMode="contain" style={{width: '100%', height: '100%'}} />
+      </Animated.View>
+    </Animated.View>
   );
 };
 

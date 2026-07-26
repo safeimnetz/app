@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import {ScrollView, View} from 'react-native';
 
-const ScrollViewBackSwipe = (props: React.ComponentProps<typeof ScrollView>) => {
+const ScrollViewBackSwipe = forwardRef<ScrollView, React.ComponentProps<typeof ScrollView>>((props, ref) => {
   return (
     <View style={{flex: 1}}>
-      <ScrollView {...props} />
+      <ScrollView ref={ref} {...props} />
       <View
         style={{
           position: 'absolute',
@@ -15,6 +15,6 @@ const ScrollViewBackSwipe = (props: React.ComponentProps<typeof ScrollView>) => 
       />
     </View>
   );
-};
+});
 
 export default ScrollViewBackSwipe;

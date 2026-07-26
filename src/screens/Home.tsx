@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import React, {useEffect, useRef} from 'react';
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {CopilotStep, useCopilot} from 'react-native-copilot';
 import {Ionicons as Icon} from '@expo/vector-icons';
 import CircleProgressBar from '../components/CircleProgressBar';
@@ -24,6 +24,8 @@ const Home = () => {
   const securityScore = (((myTasks?.length ?? 1) - (myUnreadTasks?.length ?? 0)) / (myTasks?.length ?? 1)) * 100;
 
   const copilot = useCopilot();
+  const tutorialScrollViewRef = useRef<ScrollView>(null);
+  const tutorialStartScheduled = useRef(false);
 
   useEffect(() => {
     const listener = async () => {
@@ -38,16 +40,39 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    let isMounted = true;
+
+    const startTutorial = async () => {
+      if (copilot.totalStepsNumber === 0) {
+        return;
+      }
+
+      const isDone = await _taskService.getInlineTutorialDone();
+      if (isDone || tutorialStartScheduled.current || !isMounted) {
+        return;
+      }
+
+      tutorialStartScheduled.current = true;
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          if (isMounted) {
+            void copilot.start(undefined, tutorialScrollViewRef.current);
+          }
+        }, 500);
+      });
+    };
+
+    void startTutorial();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [copilot.start, copilot.totalStepsNumber]);
+
   return (
     <ScrollViewBackSwipe
-      onLayout={async () => {
-        const isDone = await _taskService.getInlineTutorialDone();
-        if (!isDone) {
-          setTimeout(() => {
-            copilot.start();
-          }, 500);
-        }
-      }}
+      ref={tutorialScrollViewRef}
       style={{flex: 1, backgroundColor: Colors.scrollViewBackground}}
       contentContainerStyle={{paddingTop: 10}}>
       <Text style={{paddingTop: 10, paddingHorizontal: 30, color: 'gray', textTransform: 'uppercase'}}>
