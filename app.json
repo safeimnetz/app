@@ -2,7 +2,7 @@
   "expo": {
     "name": "Safe im Netz",
     "slug": "safe-im-netz",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "icon": "./assets/icon-android.png",
     "userInterfaceStyle": "light",
     "ios": {
