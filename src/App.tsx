@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, Alert, View} from 'react-native';
+import {StatusBar} from 'expo-status-bar';
 import {CopilotProvider} from 'react-native-copilot';
 import Navigation from './Navigation';
 import CustomStepNumberComponent from './components/copilot/CustomStepNumberComponent';
@@ -46,9 +47,12 @@ const App = () => {
   }
 
   return (
-    <CopilotProvider stepNumberComponent={CustomStepNumberComponent} tooltipComponent={CustomTooltipComponent}>
-      <Navigation initialRouteName={setupDone ? 'Home' : 'Welcome'} />
-    </CopilotProvider>
+    <>
+      <StatusBar style="dark" />
+      <CopilotProvider stepNumberComponent={CustomStepNumberComponent} tooltipComponent={CustomTooltipComponent}>
+        <Navigation initialRouteName={setupDone ? 'Home' : 'Welcome'} />
+      </CopilotProvider>
+    </>
   );
 };
 

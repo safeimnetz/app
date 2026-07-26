@@ -1,32 +1,39 @@
 import React, {useEffect, useState} from 'react';
-import {StyleProp, Text, TextStyle} from 'react-native';
+import {StyleProp, Text, TextStyle, View} from 'react-native';
 
 const TypewriterText = (props: {text: string; style?: StyleProp<TextStyle>; delay?: number; initialDelay?: number}) => {
   const {text, style, delay = 40, initialDelay = 200} = props;
   const [visibleCharacters, setVisibleCharacters] = useState(0);
 
   useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout> | undefined;
+    let currentCharacter = 0;
+
     setVisibleCharacters(0);
-  }, [text]);
 
-  useEffect(() => {
-    if (visibleCharacters >= text.length) {
-      return;
-    }
+    const typeNextCharacter = () => {
+      currentCharacter += 1;
+      setVisibleCharacters(currentCharacter);
 
-    const timeout = setTimeout(
-      () => setVisibleCharacters(current => Math.min(current + 1, text.length)),
-      visibleCharacters === 0 ? initialDelay : delay,
-    );
+      if (currentCharacter < text.length) {
+        timeout = setTimeout(typeNextCharacter, delay);
+      }
+    };
 
-    return () => clearTimeout(timeout);
-  }, [delay, initialDelay, text.length, visibleCharacters]);
+    timeout = setTimeout(typeNextCharacter, initialDelay);
+
+    return () => {
+      if (timeout != null) {
+        clearTimeout(timeout);
+      }
+    };
+  }, [delay, initialDelay, text]);
 
   return (
-    <Text style={style}>
-      <Text>{text.slice(0, visibleCharacters)}</Text>
-      <Text style={{color: 'transparent'}}>{text.slice(visibleCharacters)}</Text>
-    </Text>
+    <View>
+      <Text style={[style, {opacity: 0}]}>{text}</Text>
+      <Text style={[style, {position: 'absolute', top: 0, left: 0}]}>{text.slice(0, visibleCharacters)}</Text>
+    </View>
   );
 };
 

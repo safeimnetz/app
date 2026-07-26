@@ -20,7 +20,9 @@
           }
         },
         "NSLocationWhenInUseUsageDescription": "",
-        "UISupportedInterfaceOrientations": ["UIInterfaceOrientationPortrait"],
+        "UISupportedInterfaceOrientations": [
+          "UIInterfaceOrientationPortrait"
+        ],
         "UISupportedInterfaceOrientations~ipad": [
           "UIInterfaceOrientationLandscapeLeft",
           "UIInterfaceOrientationLandscapeRight",
@@ -41,11 +43,14 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#FFFFFF"
+          "backgroundColor": "#FFFFFF",
+          "image": "./assets/splash-transparent.png",
+          "imageWidth": 1
         }
       ],
       "expo-web-browser",
-      "expo-font"
+      "expo-font",
+      "expo-status-bar"
     ]
   }
 }

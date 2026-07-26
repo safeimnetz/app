@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Alert, Text, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {StatusBar} from 'expo-status-bar';
 import Animated, {FadeInDown} from 'react-native-reanimated';
 import {Config} from '../Config';
 import BouncyImage from '../components/BouncyImage';
@@ -35,6 +36,7 @@ const Welcome = () => {
 
   return (
     <View style={{flex: 1}}>
+      <StatusBar style="light" />
       <LogoGradient />
       <View
         style={{
