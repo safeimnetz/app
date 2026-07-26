@@ -4,12 +4,13 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "android": "expo run:android",
-    "ios": "expo run:ios",
-    "prebuild": "expo prebuild",
-    "prebuild:clean": "expo prebuild --clean",
     "start": "expo start",
     "start:clear": "expo start --clear",
+    "prebuild:android": "npx expo prebuild --platform android",
+    "prebuild:ios": "npx expo prebuild --platform ios",
+    "prebuild:clean": "expo prebuild --clean",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "doctor": "expo-doctor",
     "compile": "tsc --noEmit",
     "postinstall": "npm-license-crawler -onlyDirectDependencies -json licenses.json"
