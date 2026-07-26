@@ -7,7 +7,7 @@
     "userInterfaceStyle": "light",
     "ios": {
       "bundleIdentifier": "at.safeimnetz.app",
-      "buildNumber": "102001",
+      "buildNumber": "103001",
       "icon": "./assets/icon-ios.png",
       "requireFullScreen": true,
       "supportsTablet": true,
@@ -20,9 +20,7 @@
           }
         },
         "NSLocationWhenInUseUsageDescription": "",
-        "UISupportedInterfaceOrientations": [
-          "UIInterfaceOrientationPortrait"
-        ],
+        "UISupportedInterfaceOrientations": ["UIInterfaceOrientationPortrait"],
         "UISupportedInterfaceOrientations~ipad": [
           "UIInterfaceOrientationLandscapeLeft",
           "UIInterfaceOrientationLandscapeRight",
